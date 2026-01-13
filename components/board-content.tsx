@@ -82,7 +82,9 @@ const BOARD_MEMBERS: BoardMember[] = [
       github: "https://github.com/chandrasuda",
     },
   },
+];
 
+const FORMER_BOARD_MEMBERS: BoardMember[] = [
   {
     name: "Kushal Thaman",
     title: "Research",
@@ -108,6 +110,13 @@ export default function BoardContent() {
     >
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-start items-start ">
         {BOARD_MEMBERS.map((member, index) => (
+          <BoardMemberCard key={index} {...member} index={index} />
+        ))}
+      </div>
+
+      <h2 className="text-2xl font-medium text-white/80 mt-16 mb-8">Former Board Members</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-start items-start ">
+        {FORMER_BOARD_MEMBERS.map((member, index) => (
           <BoardMemberCard key={index} {...member} index={index} />
         ))}
       </div>

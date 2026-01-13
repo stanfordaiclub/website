@@ -11,6 +11,13 @@ type Speaker = {
 
 const allSpeakers: Speaker[] = [
   {
+    name: "Andrew Milich & Philip Clark",
+    role: "Cursor, Thrive Capital",
+    background: "Head of Engineering/Product at Cursor; Partner at Thrive Capital.",
+    date: new Date("2026-01-26 18:00:00"),
+    year: "2025-2026",
+  },
+  {
     name: "Audrey Wisch, Drew Bent, Rob Reich",
     role: "Anthropic, Curious Cardinals, Stanford",
     background: "Panel on AI ethics, education, and industry perspectives.",
