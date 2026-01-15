@@ -17,7 +17,7 @@ const BOARD_MEMBERS: BoardMember[] = [
   {
     name: "Jason Zhang",
     title: "Co-President",
-    image: "/board/jason.png",
+    image: "/board/jason.jpeg",
     links: {
       linkedin: "https://www.linkedin.com/in/jason-zhang-6860361b8/",
       twitter: "https://x.com/minisounds",
