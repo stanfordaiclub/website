@@ -86,8 +86,61 @@ const BOARD_MEMBERS: BoardMember[] = [
 
 const FORMER_BOARD_MEMBERS: BoardMember[] = [
   {
+    name: "Sheryl Hsu",
+    title: "OpenAI",
+    image: "/board/sheryl.jpg",
+    links: {
+      linkedin: "https://www.linkedin.com/in/sheryl-hsu-83b84a183/",
+      website: "https://sherylhsu.com/",
+      github: "https://github.com/sher222",
+      googleScholar: "https://scholar.google.com/citations?hl=en&user=gj-eJv8AAAAJ",
+    },
+  },
+  {
+    name: "Shreyas Kar",
+    title: "Golpo (YC S25)",
+    image: "/board/shreyas.jpg",
+    links: {
+      linkedin: "https://www.linkedin.com/in/shreyas-kar/",
+      twitter: "https://x.com/KarShreyas",
+      website: "https://golpo.ai",
+      github: "https://github.com/shreyaskar",
+    },
+  },
+  {
+    name: "Sazzad Islam",
+    title: "Delve",
+    image: "/board/sazzad.jpg",
+    links: {
+      linkedin: "https://www.linkedin.com/in/sazzad14/",
+      twitter: "https://x.com/sazzadir14",
+      website: "https://sazzad14.com/",
+      github: "https://github.com/sazzadi-r14",
+      googleScholar: "https://scholar.google.com/citations?user=1vePAsYAAAAJ&hl=en",
+    },
+  },
+  {
+    name: "Quinn McIntyre",
+    title: "Prod",
+    image: "/board/quinn.jpg",
+    links: {
+      linkedin: "https://www.linkedin.com/in/quinn-mcintyre/",
+      github: "https://github.com/qamcintyre",
+    },
+  },
+  {
+    name: "Arjun Vikram",
+    title: "OpenAI",
+    image: "/board/arjun.png",
+    links: {
+      linkedin: "https://www.linkedin.com/in/arjun-vikram/",
+      github: "https://github.com/arjvik",
+      googleScholar: "https://scholar.google.com/citations?user=3VnBRu4AAAAJ&hl=en",
+    },
+  },
+  {
     name: "Kushal Thaman",
-    title: "Research",
+    title: "Flapping Airplanes",
     image: "/board/kushal.png",
     links: {
       linkedin: "https://www.linkedin.com/in/k-thaman/",
@@ -95,6 +148,14 @@ const FORMER_BOARD_MEMBERS: BoardMember[] = [
       website: "https://cs.stanford.edu/~kushalt/",
       googleScholar: "https://scholar.google.com/citations?user=89nZKJgAAAAJ",
       github: "https://github.com/kushalthaman",
+    },
+  },
+  {
+    name: "William Liu",
+    title: "Founder",
+    image: "/board/william.jpg",
+    links: {
+      linkedin: "https://www.linkedin.com/in/williamsliu/",
     },
   },
 ];
