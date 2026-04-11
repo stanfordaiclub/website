@@ -24,6 +24,50 @@ const allSpeakers: Speaker[] = [
     date: new Date("2026-01-22 18:00:00"),
     year: "2025-2026",
   },
+  {
+    name: "Chamath Palihapitiya",
+    role:
+      "Early Facebook growth; 8090 Founder; All-In Podcast; Warriors co-owner; Social Capital Founder",
+    background:
+      "Investor and entrepreneur across consumer tech, climate, and public markets.",
+    date: new Date("2026-04-20 18:00:00"),
+    year: "2025-2026",
+  },
+  {
+    name: "Erik Bernhardsson",
+    role: "Co-founder & CEO, Modal",
+    background: "Building cloud infrastructure for AI and batch compute.",
+    date: new Date("2026-04-13 18:00:00"),
+    year: "2025-2026",
+  },
+  {
+    name: "Sangeen Zeb",
+    role: "General Partner, Google Ventures",
+    background: "Invests in early-stage technology companies at GV.",
+    date: new Date("2026-03-02 18:00:00"),
+    year: "2025-2026",
+  },
+  {
+    name: "Stephanie Chan",
+    role: "Senior Research Scientist, Google DeepMind",
+    background: "Research at the frontier of large-scale ML and AI systems.",
+    date: new Date("2026-02-19 18:00:00"),
+    year: "2025-2026",
+  },
+  {
+    name: "Cory Levy & Z Fellows",
+    role: "Z Fellows",
+    background: "Program supporting young founders building ambitious companies.",
+    date: new Date("2026-02-16 18:00:00"),
+    year: "2025-2026",
+  },
+  {
+    name: "Konstantine Buhler",
+    role: "Partner, Sequoia Capital",
+    background: "Invests in AI, enterprise, and frontier technology companies.",
+    date: new Date("2026-02-09 18:00:00"),
+    year: "2025-2026",
+  },
   // {
   //   name: "Bret Taylor",
   //   role: "CEO, Sierra; Chair, OpenAI Board",
