@@ -104,7 +104,6 @@ const FORMER_BOARD_MEMBERS: BoardMember[] = [
       linkedin: "https://www.linkedin.com/in/shreyas-kar/",
       twitter: "https://x.com/KarShreyas",
       website: "https://golpo.ai",
-      github: "https://github.com/shreyaskar",
     },
   },
   {
