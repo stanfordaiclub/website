@@ -59,7 +59,7 @@ export default function SiteTitle({ start = true }: { start?: boolean }) {
     >
       <h1
         aria-label={TITLE}
-        className="whitespace-nowrap text-[clamp(2.5rem,8.5vw,10rem)] font-normal leading-[0.95] tracking-[-0.05em] text-neutral-950"
+        className="whitespace-nowrap text-[clamp(2.5rem,8.5vw,10rem)] font-normal leading-[0.95] tracking-[-0.05em] text-white"
       >
         {TITLE.split("").map((ch, i) => (
           <span
