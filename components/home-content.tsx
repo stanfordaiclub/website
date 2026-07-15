@@ -16,10 +16,21 @@ import { useLenis } from "@/components/smooth-scroll";
  */
 export default function HomeContent() {
   const [loading, setLoading] = useState(true);
+  // Once the preloader has played this session, skip it entirely so returning
+  // to the home page doesn't replay the full loading screen.
+  const [skipPreloader, setSkipPreloader] = useState(false);
   const lenis = useLenis();
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2500);
+    if (sessionStorage.getItem("saic-preloaded")) {
+      setSkipPreloader(true);
+      setLoading(false);
+      return;
+    }
+    const timer = setTimeout(() => {
+      setLoading(false);
+      sessionStorage.setItem("saic-preloaded", "1");
+    }, 2500);
     return () => clearTimeout(timer);
   }, []);
 
@@ -81,7 +92,7 @@ export default function HomeContent() {
   return (
     <>
       <HeroVideo />
-      <Preloader show={loading} />
+      {!skipPreloader && <Preloader show={loading} />}
       <FrameDecor start={!loading} />
       <NavBar start={!loading} />
       <IntroText start={!loading} />

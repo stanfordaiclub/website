@@ -4,6 +4,7 @@ import { Fragment, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { useLenis } from "@/components/smooth-scroll";
+import SlidingEaseVerticalBars from "@/components/sliding-ease-vertical-bars";
 
 const HEADING =
   "We bring Stanford’s AI community together to push frontier research forward.";
@@ -150,6 +151,7 @@ function Line({ index }: { index: number }) {
  */
 export default function AboutSection() {
   const trackRef = useRef<HTMLDivElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
   const lenis = useLenis();
 
@@ -162,7 +164,11 @@ export default function AboutSection() {
       // Progress through the tall track: 0 at its top, 1 once fully scrolled.
       const total = track.offsetHeight - window.innerHeight;
       const scrolled = -track.getBoundingClientRect().top;
-      const p = total > 0 ? scrolled / total : 0;
+      const p = Math.max(0, Math.min(1, total > 0 ? scrolled / total : 0));
+      // Drive the progress bar directly to keep it smooth without re-rendering.
+      if (progressRef.current) {
+        progressRef.current.style.transform = `scaleY(${p})`;
+      }
       const idx = Math.max(
         0,
         Math.min(ITEMS.length - 1, Math.floor(p * ITEMS.length))
@@ -187,7 +193,7 @@ export default function AboutSection() {
   }, [lenis]);
 
   return (
-    <section data-snap-section className="relative bg-[#E11D2A] text-white">
+    <section data-snap-section className="relative bg-[#4E0A0A] text-white">
       <div
         ref={trackRef}
         className="relative"
@@ -195,15 +201,52 @@ export default function AboutSection() {
       >
         {/* Pinned panel — stays put while the track scrolls past. */}
         <div className="sticky top-0 flex h-dvh flex-col overflow-hidden [justify-content:safe_center]">
+          {/* Animated sliding vertical bars background, themed to the section. */}
+          <div className="absolute inset-0 z-0">
+            <SlidingEaseVerticalBars
+              backgroundColor="#4E0A0A"
+              lineColor="#6b1119"
+              barColor="#ff5560"
+            />
+          </div>
+          {/* Fade the bars out over the left half so they never sit behind the
+              text — solid red where the copy is, revealing the bars only right. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-0"
+            style={{
+              background:
+                "linear-gradient(to right, #4E0A0A 0%, #4E0A0A 48%, rgba(78,10,10,0) 82%)",
+            }}
+          />
+          {/* Soften the bars near the top too, so the header stays legible. */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 z-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, #4E0A0A 0%, #4E0A0A 14%, rgba(78,10,10,0) 46%)",
+            }}
+          />
+
           {/* Vertical guides continuing the hero frame down into this section. */}
           <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
             <VLine side="left-[1.25rem]" />
             <VLine side="right-[1.25rem]" />
             <VLine side="left-[4rem]" />
             <VLine side="right-[4rem]" />
+
+            {/* Scroll progress — a white bar filling down the left frame line. */}
+            <div
+              ref={progressRef}
+              className="absolute left-[4rem] top-0 h-full w-[2px] origin-top bg-white"
+              style={{ transform: "scaleY(0)" }}
+            />
           </div>
 
-          <div className="relative z-10 w-full max-w-5xl px-6 py-[6vh] sm:px-10 lg:px-16">
+          {/* Left padding clears the progress bar / guide line at 4rem so the
+              numbers and titles aren't crowding it. */}
+          <div className="relative z-10 w-full max-w-5xl py-[6vh] pl-24 pr-6 sm:pr-10 lg:pr-16">
             <AnimatedHeading />
 
             <ul className="mt-[5vh]">
