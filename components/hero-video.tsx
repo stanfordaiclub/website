@@ -17,6 +17,8 @@ export default function HeroVideo() {
         playsInline
         preload="auto"
         poster="/header-poster.jpg"
+        disablePictureInPicture
+        controlsList="nodownload noplaybackrate noremoteplayback"
       >
         {/* WebM (VP9) first — ~40% smaller for modern browsers; MP4 fallback
             keeps it playing on older Safari/iOS. */}

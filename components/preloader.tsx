@@ -21,22 +21,30 @@ const Stairs = () => {
       {/* Welcome text */}
       <div className="absolute z-10 flex h-full w-full items-center justify-center text-center text-white">
         <motion.h1
-          className="text-3xl font-semibold tracking-tighter"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1, transition: { duration: 4 } }}
-          exit={{ opacity: 0, transition: { duration: 0.6 } }}
+          className="text-3xl font-medium tracking-tighter"
+          style={{ fontFamily: "var(--font-bdo-grotesk)" }}
         >
           {words.map((word, index) => (
-            <motion.span
-              key={index}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 1, delay: 0.2 * index }}
-              className="mr-2 inline-block"
-            >
-              {word}
-            </motion.span>
+            <span key={index} className="mr-2 inline-block overflow-hidden pb-1">
+              <motion.span
+                className="inline-block"
+                initial={{ y: "115%" }}
+                animate={{ y: 0 }}
+                // Roll up and out (never back down) so the text leaves with the
+                // stairs wipe instead of dropping.
+                exit={{
+                  y: "-115%",
+                  transition: { duration: 0.5, ease: [0.7, 0, 0.3, 1] },
+                }}
+                transition={{
+                  duration: 0.8,
+                  delay: 0.15 * index,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+              >
+                {word}
+              </motion.span>
+            </span>
           ))}
         </motion.h1>
       </div>

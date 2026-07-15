@@ -40,10 +40,9 @@ export default function SiteTitle({ start = true }: { start?: boolean }) {
           duration: 0.9,
           ease: "power4.out",
           stagger: 0.075,
-          // Come in while the star is almost done moving left. Star glide runs
-          // 1.1s -> 2.7s (midpoint ~1.9s); start just past halfway so the text
-          // climbs in as the star finishes its final approach.
-          delay: 2.0,
+          // Climb in right as the preloader stairs finish wiping away, so the
+          // title arrives on the heels of the loading stagger.
+          delay: 0.9,
         }
       );
     }, root);
@@ -54,7 +53,7 @@ export default function SiteTitle({ start = true }: { start?: boolean }) {
   return (
     <div
       ref={rootRef}
-      className="pointer-events-none absolute bottom-0 right-0 z-10 pr-[1.5vw] pb-[1.5vw]"
+      className="pointer-events-none absolute bottom-0 right-0 z-20 pr-[5.5rem] pb-[4.5rem]"
       style={{ fontFamily: "var(--font-ciburial)" }}
     >
       <h1
