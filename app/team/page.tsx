@@ -66,7 +66,7 @@ function BackLink({ className = "" }: { className?: string }) {
     <Link
       href="/"
       aria-label="Back to home"
-      className={`group inline-flex items-center text-white ${className}`}
+      className={`group inline-flex items-center text-neutral-900 ${className}`}
     >
       <svg
         viewBox="0 0 24 24"
@@ -120,7 +120,7 @@ function AnimatedTitle({ text }: { text: string }) {
     <h1
       ref={rootRef}
       aria-label={text}
-      className="mt-8 whitespace-nowrap text-6xl font-medium leading-[0.95] tracking-tight text-white sm:text-8xl"
+      className="mt-8 whitespace-nowrap text-6xl font-medium leading-[0.95] tracking-tight text-neutral-900 sm:text-8xl"
     >
       {text.split("").map((ch, i) => (
         <span
@@ -139,7 +139,7 @@ function AnimatedTitle({ text }: { text: string }) {
 
 export default function TeamPage() {
   return (
-    <main className="min-h-dvh bg-black text-white">
+    <main className="min-h-dvh bg-white text-neutral-900">
       <div className="mx-auto w-full max-w-5xl px-6 pb-24 pt-16 sm:pt-20 md:px-10 lg:px-14">
         <BackLink />
 
@@ -148,7 +148,7 @@ export default function TeamPage() {
         <div className="mt-16">
           {/* Column headers */}
           <div
-            className={`${ROW} border-b border-white/15 pb-4 text-sm font-medium text-white/45`}
+            className={`${ROW} border-b border-black/10 pb-4 text-sm font-medium text-black/40`}
           >
             <span>Name</span>
             <span className="text-right">Position</span>
@@ -167,12 +167,12 @@ export default function TeamPage() {
                   delay: Math.min(i * 0.05, 0.4),
                   ease: [0.22, 1, 0.36, 1],
                 }}
-                className={`${ROW} group border-b border-white/10 py-5`}
+                className={`${ROW} group border-b border-black/10 py-5`}
               >
-                <span className="text-base text-white/70 transition-colors duration-300 group-hover:text-white md:text-lg">
+                <span className="text-base text-black/60 transition-colors duration-300 group-hover:text-black md:text-lg">
                   {m.name}
                 </span>
-                <span className="text-right text-sm text-white/45 transition-colors duration-300 group-hover:text-white md:text-base">
+                <span className="text-right text-sm text-black/45 transition-colors duration-300 group-hover:text-black md:text-base">
                   {m.position}
                 </span>
                 {/* LinkedIn — hidden until the row is hovered, then slides in. */}
@@ -181,7 +181,7 @@ export default function TeamPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={`${m.name} on LinkedIn`}
-                  className="flex translate-x-2 justify-end text-white/70 opacity-0 transition-all duration-300 ease-out hover:text-white group-hover:translate-x-0 group-hover:opacity-100"
+                  className="flex translate-x-2 justify-end text-black/60 opacity-0 transition-all duration-300 ease-out hover:text-black group-hover:translate-x-0 group-hover:opacity-100"
                 >
                   <LinkedInIcon />
                 </a>
