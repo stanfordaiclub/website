@@ -1,17 +1,43 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import localFont from "next/font/local";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
-import Footer from "@/components/footer";
+import SmoothScroll from "@/components/smooth-scroll";
+import Cursor from "@/components/cursor";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const bdoGrotesk = localFont({
+  src: [
+    {
+      path: "./fonts/BDOGrotesk-Regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "./fonts/BDOGrotesk-Medium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "./fonts/BDOGrotesk-Bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  variable: "--font-bdo-grotesk",
+  display: "swap",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+// LCT Ciburial — statement industrial display face, used for large titles.
+const ciburial = localFont({
+  src: [
+    {
+      path: "./fonts/LCT-Ciburial-Regular.woff2",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+  variable: "--font-ciburial",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -26,9 +52,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <meta name="theme-color" content="#1f0000" />
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <NuqsAdapter>{children}</NuqsAdapter>
+      <body className={`${bdoGrotesk.variable} ${ciburial.variable} antialiased`}>
+        <NuqsAdapter>
+          <SmoothScroll>{children}</SmoothScroll>
+          <Cursor />
+        </NuqsAdapter>
       </body>
     </html>
   );
