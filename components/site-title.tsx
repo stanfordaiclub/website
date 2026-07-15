@@ -53,12 +53,12 @@ export default function SiteTitle({ start = true }: { start?: boolean }) {
   return (
     <div
       ref={rootRef}
-      className="pointer-events-none absolute bottom-0 right-0 z-20 pr-[5.5rem] pb-[4.5rem]"
+      className="pointer-events-none absolute bottom-0 left-0 z-20 pl-6 pb-10 sm:left-auto sm:right-0 sm:pl-0 sm:pr-[5.5rem] sm:pb-[4.5rem]"
       style={{ fontFamily: "var(--font-ciburial)" }}
     >
       <h1
         aria-label={TITLE}
-        className="whitespace-nowrap text-[clamp(2.5rem,8.5vw,10rem)] font-normal leading-[0.95] tracking-[-0.05em] text-white"
+        className="whitespace-nowrap text-[clamp(2rem,8.5vw,10rem)] font-normal leading-[0.95] tracking-[-0.05em] text-white"
       >
         {TITLE.split("").map((ch, i) => (
           <span

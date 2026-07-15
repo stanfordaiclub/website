@@ -1,41 +1,10 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
 import { motion } from "framer-motion";
 import gsap from "gsap";
 import { SPEAKERS, type Speaker } from "@/lib/speakers";
-
-/**
- * Back-to-home link: a crisp chevron that, on hover, slides the label
- * "Back to home" cleanly out from behind it.
- */
-function BackLink({ className = "" }: { className?: string }) {
-  return (
-    <Link
-      href="/"
-      aria-label="Back to home"
-      className={`group inline-flex items-center text-white ${className}`}
-    >
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth={2.25}
-        strokeLinecap="square"
-        strokeLinejoin="miter"
-        className="h-7 w-7 shrink-0 transition-transform duration-300 ease-out group-hover:-translate-x-1"
-      >
-        <path d="M15 5 8 12 15 19" />
-      </svg>
-      <span className="max-w-0 overflow-hidden whitespace-nowrap opacity-0 transition-all duration-300 ease-out group-hover:max-w-[10rem] group-hover:opacity-100">
-        <span className="pl-2 text-sm font-medium tracking-tight">
-          Back to home
-        </span>
-      </span>
-    </Link>
-  );
-}
+import BackLink from "@/components/back-link";
 
 const NBSP = String.fromCharCode(160); // keeps the word gap width in the title
 
@@ -162,7 +131,7 @@ export default function SpeakersPage() {
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
             {/* Back — a crisp chevron over the top-left of the video. */}
-            <BackLink className="absolute left-6 top-6 z-10 lg:left-8 lg:top-8" />
+            <BackLink className="absolute left-6 top-6 z-10 text-white lg:left-8 lg:top-8" />
           </div>
         </div>
 
@@ -170,7 +139,7 @@ export default function SpeakersPage() {
         <div className="px-6 pb-24 pt-16 sm:pt-20 md:px-10 lg:px-14">
           {/* Mobile back — the video (and its chevron) is hidden on small
               screens, so surface a chevron at the top-left of the list. */}
-          <BackLink className="mb-6 md:hidden" />
+          <BackLink className="mb-6 text-white md:hidden" />
 
           <AnimatedTitle text="Speakers" />
 

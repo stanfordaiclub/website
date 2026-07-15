@@ -25,11 +25,18 @@ export default function HomeContent() {
     if (sessionStorage.getItem("saic-preloaded")) {
       setSkipPreloader(true);
       setLoading(false);
+      // No loading screen this time — let the cursor take over normally.
+      window.dispatchEvent(new Event("saic:loaded"));
       return;
     }
+    // Keep the native cursor while the loading screen is up.
+    document.documentElement.classList.add("is-loading");
     const timer = setTimeout(() => {
       setLoading(false);
       sessionStorage.setItem("saic-preloaded", "1");
+      document.documentElement.classList.remove("is-loading");
+      // Loading page is gone — kick off the cursor hand-off countdown.
+      window.dispatchEvent(new Event("saic:loaded"));
     }, 2500);
     return () => clearTimeout(timer);
   }, []);
@@ -92,6 +99,19 @@ export default function HomeContent() {
   return (
     <>
       <HeroVideo />
+      {/* Whole-hero click target to the club's YouTube; drives the video
+          cursor. Sits below the nav so nav links keep the normal cursor. Only
+          active once loading is done, so you can't click through the loader. */}
+      {!loading && (
+        <a
+          href="https://www.youtube.com/@OfficialStanfordAIClub"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Watch the Stanford AI Club on YouTube"
+          data-video-cursor
+          className="absolute inset-0 z-[5]"
+        />
+      )}
       {!skipPreloader && <Preloader show={loading} />}
       <FrameDecor start={!loading} />
       <NavBar start={!loading} />

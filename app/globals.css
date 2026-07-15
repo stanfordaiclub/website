@@ -147,10 +147,13 @@
 /* Custom cursor: hide the native one on mouse devices, hide the custom dot on
    touch devices (where there is no pointer to follow). */
 @layer base {
+  /* Hide the native cursor only once the custom cursor has taken over
+     (html.cursor-ready is set when the loading screen clears). */
   @media (pointer: fine) {
-    *,
-    *::before,
-    *::after {
+    html.cursor-ready,
+    html.cursor-ready *,
+    html.cursor-ready *::before,
+    html.cursor-ready *::after {
       cursor: none !important;
     }
   }

@@ -57,7 +57,7 @@ export default function IntroText({ start = true }: { start?: boolean }) {
   return (
     <div
       ref={rootRef}
-      className="pointer-events-none absolute bottom-0 left-[5rem] z-20 max-w-[28rem] pb-[4.5rem]"
+      className="pointer-events-none absolute left-6 top-24 z-20 max-w-[17rem] sm:left-[5rem] sm:top-auto sm:bottom-0 sm:max-w-[28rem] sm:pb-[4.5rem]"
     >
       <p className="text-sm font-medium leading-relaxed tracking-[-0.02em] text-white/70 sm:text-base">
         {WORDS.map((word, i) => (
