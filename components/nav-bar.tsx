@@ -132,7 +132,7 @@ export default function NavBar({ start = true }: { start?: boolean }) {
     <>
       <nav
         ref={rootRef}
-        className="fixed right-0 top-[1.25rem] z-40 flex h-[2.75rem] items-center pr-[1.5rem] sm:pr-[5.5rem]"
+        className="fixed right-2 top-2 z-40 flex h-12 items-center pr-2 sm:right-0 sm:top-[1.25rem] sm:h-[2.75rem] sm:pr-[5.5rem]"
       >
         {/* Desktop nav */}
         <ul className="hidden items-center gap-8 sm:flex sm:gap-10">
@@ -174,7 +174,7 @@ export default function NavBar({ start = true }: { start?: boolean }) {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="nav-item relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-[6px] text-white will-change-[transform,filter,opacity] sm:hidden"
+          className="nav-item relative z-50 flex h-11 w-11 flex-col items-center justify-center gap-[6px] text-white will-change-[transform,filter,opacity] sm:hidden"
         >
           <motion.span
             className="block h-px w-6 bg-white"
@@ -198,10 +198,10 @@ export default function NavBar({ start = true }: { start?: boolean }) {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.4, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-30 flex flex-col justify-center bg-black/90 px-[1.5rem] backdrop-blur-md sm:hidden"
+            className="fixed inset-0 z-30 flex flex-col justify-end bg-black/90 px-6 pb-[max(2.5rem,env(safe-area-inset-bottom))] pt-24 backdrop-blur-md sm:hidden"
           >
             <motion.ul
-              className="flex flex-col gap-6"
+              className="flex flex-col gap-5"
               initial="hidden"
               animate="show"
               exit="hidden"
@@ -222,7 +222,7 @@ export default function NavBar({ start = true }: { start?: boolean }) {
                   <Link
                     href={href}
                     onClick={() => setOpen(false)}
-                    className="text-4xl font-medium tracking-tight text-white/90 transition-colors hover:text-white"
+                    className="block py-1 text-[clamp(2.75rem,13vw,4rem)] font-medium leading-none tracking-tight text-white/90 transition-colors hover:text-white"
                   >
                     {label}
                   </Link>
@@ -235,7 +235,7 @@ export default function NavBar({ start = true }: { start?: boolean }) {
                   show: { opacity: 1, y: 0 },
                 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="mt-6 flex items-center gap-5"
+                className="mt-5 flex items-center gap-3"
               >
                 {SOCIALS.map(({ label, href, icon }) => (
                   <a
@@ -244,7 +244,7 @@ export default function NavBar({ start = true }: { start?: boolean }) {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="inline-flex text-white/70 transition-colors hover:text-white"
+                    className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/75 transition-colors hover:bg-white/10 hover:text-white"
                   >
                     {icon}
                   </a>

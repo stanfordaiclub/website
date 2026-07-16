@@ -7,7 +7,7 @@ import PageFrame from "@/components/page-frame";
 import OriginalRails from "@/components/original-rails";
 
 const INTRO =
-  "Subscribe to our mailing list and follow us on social media to keep up with the latest events, workshops, and exclusive opportunities in AI at Stanford.";
+  "Talks, research opportunities, and new initiatives—straight from Stanford’s frontier AI community.";
 
 const MAILING_LIST =
   "https://mailman.stanford.edu/mailman/listinfo/saic-members";
@@ -67,7 +67,7 @@ function AnimatedTitle({ text }: { text: string }) {
     <h1
       ref={rootRef}
       aria-label={text}
-      className="text-6xl font-medium leading-[0.95] tracking-tight text-white sm:text-7xl md:text-8xl"
+      className="text-5xl font-medium leading-[0.95] tracking-tight text-white sm:text-7xl md:text-8xl"
     >
       {words.map((word, wi) => (
         <Fragment key={wi}>
@@ -93,7 +93,7 @@ function AnimatedTitle({ text }: { text: string }) {
 
 export default function GetInvolvedPage() {
   return (
-    <main className="relative min-h-dvh overflow-hidden bg-black text-white">
+    <main className="relative min-h-dvh overflow-x-hidden bg-black text-white sm:overflow-hidden">
       {/* Ambient animated red bars, faded out over the left so the copy stays
           clean; a warm glow anchors the corner. */}
       <div className="absolute inset-0 z-0">
@@ -126,10 +126,10 @@ export default function GetInvolvedPage() {
 
       <PageFrame />
 
-      <div className="relative z-10 mx-auto flex min-h-dvh w-full max-w-6xl flex-col px-6 pb-16 pt-14 sm:px-10 lg:px-[5.5rem]">
+      <div className="relative z-10 mx-auto flex min-h-dvh w-full max-w-6xl flex-col px-5 pb-[max(2rem,env(safe-area-inset-bottom))] pt-5 sm:px-10 sm:pb-16 sm:pt-14 lg:px-[5.5rem]">
         <BackLink className="text-white" />
 
-        <div className="flex flex-1 flex-col justify-center py-16">
+        <div className="flex flex-1 flex-col justify-center py-12 sm:py-16">
           <p className="mb-7 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-white/40">
             <span className="inline-block h-1.5 w-1.5 rounded-full bg-[#ac1515]" />
             Stanford AI Club
@@ -137,16 +137,16 @@ export default function GetInvolvedPage() {
 
           <AnimatedTitle text="Get Involved" />
 
-          <p className="mt-9 max-w-2xl text-lg leading-relaxed text-white/55 md:text-xl">
+          <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/55 sm:mt-9 sm:text-lg md:text-xl">
             {INTRO}
           </p>
 
-          <div className="mt-12 flex flex-col items-start gap-5 sm:flex-row sm:items-center">
+          <div className="mt-9 flex flex-col items-start gap-5 sm:mt-12 sm:flex-row sm:items-center">
             <a
               href={MAILING_LIST}
               target="_blank"
               rel="noopener noreferrer"
-              className="group inline-flex items-center gap-2.5 rounded-full border border-white/15 bg-gradient-to-b from-[#ac1515]/70 to-[#ac1515]/20 px-8 py-3.5 text-lg font-medium tracking-tight text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:from-[#ac1515]/85 hover:shadow-2xl active:scale-95"
+              className="group inline-flex min-h-12 w-full items-center justify-center gap-2.5 rounded-full border border-white/15 bg-gradient-to-b from-[#ac1515]/70 to-[#ac1515]/20 px-8 py-3.5 text-lg font-medium tracking-tight text-white shadow-lg transition-all duration-200 hover:-translate-y-0.5 hover:from-[#ac1515]/85 hover:shadow-2xl active:scale-95 sm:w-auto"
             >
               Join Mailing List
               <svg

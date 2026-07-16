@@ -31,7 +31,7 @@ const Stairs = () => {
       <div className="absolute z-10 flex h-full w-full items-center justify-center text-center text-white">
         <motion.h1
           aria-label={copy}
-          className="text-3xl font-medium tracking-tighter"
+          className="px-8 text-2xl font-medium leading-tight tracking-tighter sm:px-0 sm:text-3xl"
           style={{ fontFamily: "var(--font-bdo-grotesk)" }}
           exit={{
             y: -20,

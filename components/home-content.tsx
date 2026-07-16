@@ -78,6 +78,7 @@ export default function HomeContent() {
   // stay reachable.
   useEffect(() => {
     if (!lenis || loading) return;
+    if (window.matchMedia("(max-width: 639px)").matches) return;
     const red = document.querySelectorAll<HTMLElement>("[data-snap-section]")[1];
     if (!red) return;
 
@@ -126,8 +127,31 @@ export default function HomeContent() {
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Watch the Stanford AI Club on YouTube"
-          className="absolute inset-0 z-[5]"
+          className="absolute inset-0 z-[5] hidden sm:block"
         />
+      )}
+      {!loading && (
+        <a
+          href="https://www.youtube.com/@OfficialStanfordAIClub"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="absolute bottom-[5.25rem] right-5 z-20 inline-flex min-h-11 items-center gap-2 rounded-full border border-white/20 bg-black/35 px-4 text-[13px] font-medium text-white/90 backdrop-blur-md sm:hidden"
+        >
+          Watch on YouTube
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1.8}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-3.5 w-3.5"
+            aria-hidden
+          >
+            <path d="M7 17 17 7" />
+            <path d="M8 7h9v9" />
+          </svg>
+        </a>
       )}
       {!skipPreloader && (
         <Preloader

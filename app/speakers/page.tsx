@@ -41,7 +41,7 @@ function AnimatedTitle({ text }: { text: string }) {
     <h1
       ref={rootRef}
       aria-label={text}
-      className="mt-8 whitespace-nowrap text-6xl font-medium leading-[0.95] tracking-tight text-white sm:text-8xl"
+      className="mt-8 whitespace-nowrap text-5xl font-medium leading-[0.95] tracking-tight text-white sm:text-8xl"
     >
       {text.split("").map((ch, i) => (
         <span
@@ -136,16 +136,20 @@ export default function SpeakersPage() {
         </div>
 
         {/* Right half — the full speakers list. */}
-        <div className="px-6 pb-24 pt-16 sm:pt-20 md:px-10 lg:px-14">
+        <div className="px-5 pb-16 pt-5 sm:px-6 sm:pb-24 sm:pt-20 md:px-10 lg:px-14">
           {/* Mobile back — the video (and its chevron) is hidden on small
               screens, so surface a chevron at the top-left of the list. */}
-          <BackLink className="mb-6 text-white md:hidden" />
+          <BackLink className="mb-4 text-white sm:mb-6 md:hidden" />
 
           <AnimatedTitle text="Speakers" />
 
-          <div className="mt-16 flex flex-col gap-14">
+          <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/45 sm:mt-6 sm:text-base md:text-lg">
+            Frontier researchers. Stanford rooms. 800K+ views and counting.
+          </p>
+
+          <div className="mt-10 flex flex-col gap-10 sm:mt-14 sm:gap-14">
             {sequence.map(({ year, yearIndex, rows }) => (
-              <section key={year} className="flex flex-col gap-6">
+              <section key={year} className="flex flex-col gap-4 sm:gap-6">
                 <motion.h2
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -170,24 +174,24 @@ export default function SpeakersPage() {
                         ease: [0.22, 1, 0.36, 1],
                         delay: LIST_START + index * STEP,
                       }}
-                      className="group relative -mx-4 flex flex-col justify-between gap-1 rounded-xl px-4 py-6 transition-colors duration-300 ease-out hover:bg-white/[0.035] md:flex-row md:items-start md:gap-8"
+                      className="group relative -mx-4 flex flex-col justify-between gap-1 rounded-xl px-4 py-5 transition-colors duration-300 ease-out md:flex-row md:items-start md:gap-8 md:py-6 md:hover:bg-white/[0.035]"
                     >
-                      <div className="min-w-0 flex-1 transition-transform duration-300 ease-out group-hover:translate-x-1">
+                      <div className="min-w-0 flex-1 transition-transform duration-300 ease-out md:group-hover:translate-x-1">
                         <div className="mb-1.5 flex flex-wrap items-baseline gap-x-3 gap-y-0.5">
                           <h3 className="text-base font-medium tracking-tight text-white md:text-lg">
                             {s.name}
                           </h3>
-                          <span className="text-sm font-medium text-white/55 transition-colors duration-300 group-hover:text-white/80">
+                          <span className="text-sm font-medium text-white/55 transition-colors duration-300 md:group-hover:text-white/80">
                             {s.role}
                           </span>
                         </div>
-                        <p className="text-xs leading-relaxed text-white/40 transition-colors duration-300 group-hover:text-white/60 md:text-sm">
+                        <p className="text-xs leading-relaxed text-white/40 transition-colors duration-300 md:text-sm md:group-hover:text-white/60">
                           {s.background}
                         </p>
                       </div>
 
                       {s.date && (
-                        <div className="shrink-0 whitespace-nowrap text-xs font-medium tabular-nums text-white/45 transition-colors duration-300 group-hover:text-white/70 md:pt-1">
+                        <div className="shrink-0 whitespace-nowrap text-xs font-medium tabular-nums text-white/45 transition-colors duration-300 md:pt-1 md:group-hover:text-white/70">
                           {formatDate(s.date)}
                         </div>
                       )}

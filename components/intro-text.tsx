@@ -1,7 +1,7 @@
 import DiffusionText from "@/components/diffusion-text";
 
 const COPY =
-  "Stanford AI Club is where the students that shape the future of AI at Stanford come together. From research to industry, we offer opportunities to connect with titans of industry, learn from the best in the field, and get started in the field.";
+  "Stanford’s student-run community for frontier AI research. Organization of, for, and by undergraduate students and graduate students across SAIL, leading labs, and industry.";
 
 /**
  * Short mission blurb in the top-left corner. Its token field denoises after
@@ -10,11 +10,11 @@ const COPY =
 export default function IntroText({ start = true }: { start?: boolean }) {
   return (
     <div
-      className="pointer-events-none absolute left-6 top-24 z-20 max-w-[17rem] sm:left-[5rem] sm:top-auto sm:bottom-0 sm:max-w-[28rem] sm:pb-[4.5rem]"
+      className="pointer-events-none absolute left-6 right-16 top-24 z-20 max-w-none sm:bottom-0 sm:left-[5rem] sm:right-auto sm:top-auto sm:max-w-[28rem] sm:pb-[4.5rem]"
     >
       <p
         aria-label={COPY}
-        className="text-sm font-medium leading-relaxed tracking-[-0.02em] text-white/70 sm:text-base"
+        className="text-[13px] font-medium leading-[1.55] tracking-[-0.02em] text-white/75 sm:text-base sm:leading-relaxed sm:text-white/70"
       >
         <DiffusionText
           text={COPY}

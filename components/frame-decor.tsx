@@ -56,7 +56,7 @@ export default function FrameDecor({ start = true }: { start?: boolean }) {
       className="pointer-events-none absolute inset-0 z-10"
     >
       {/* Outer inset rectangle */}
-      <div className="absolute inset-[1.25rem]">
+      <div className="absolute inset-3 sm:inset-[1.25rem]">
         {/* Outer frame sides — each grows from a corner */}
         <div className={`${line} frame-h left-0 top-0 h-px w-full origin-left`} />
         <div className={`${line} frame-h bottom-0 left-0 h-px w-full origin-right`} />
@@ -66,10 +66,10 @@ export default function FrameDecor({ start = true }: { start?: boolean }) {
 
       {/* Inner margin lines — span the full viewport so they run off-screen,
           crossing the outer frame to carve the corner boxes. */}
-      <div className={`${line} frame-h left-0 top-[4rem] h-px w-full origin-left`} />
-      <div className={`${line} frame-h bottom-[4rem] left-0 h-px w-full origin-right`} />
-      <div className={`${line} frame-v left-[4rem] top-0 h-full w-px origin-top`} />
-      <div className={`${line} frame-v right-[4rem] top-0 h-full w-px origin-bottom`} />
+      <div className={`${line} frame-h left-0 top-[4rem] hidden h-px w-full origin-left sm:block`} />
+      <div className={`${line} frame-h bottom-[4rem] left-0 hidden h-px w-full origin-right sm:block`} />
+      <div className={`${line} frame-v left-[4rem] top-0 hidden h-full w-px origin-top sm:block`} />
+      <div className={`${line} frame-v right-[4rem] top-0 hidden h-full w-px origin-bottom sm:block`} />
     </div>
   );
 }

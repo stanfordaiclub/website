@@ -58,7 +58,8 @@ const MEMBERS: {
   },
 ];
 
-const ROW = "grid grid-cols-[1.5fr_1fr] items-center gap-4";
+const ROW =
+  "grid grid-cols-[minmax(0,1fr)_6.5rem] items-center gap-3 sm:grid-cols-[1.5fr_1fr] sm:gap-4";
 
 // The "Team" title's letters finish climbing in around here; the table then
 // cascades in as the next beat.
@@ -113,7 +114,7 @@ function AnimatedTitle({ text }: { text: string }) {
     <h1
       ref={rootRef}
       aria-label={text}
-      className="mt-8 whitespace-nowrap text-6xl font-medium leading-[0.95] tracking-tight text-neutral-900 sm:text-8xl"
+      className="mt-8 whitespace-nowrap text-5xl font-medium leading-[0.95] tracking-tight text-neutral-900 sm:text-8xl"
     >
       {text.split("").map((ch, i) => (
         <span
@@ -133,12 +134,12 @@ function AnimatedTitle({ text }: { text: string }) {
 export default function TeamPage() {
   return (
     <main className="min-h-dvh bg-white text-neutral-900">
-      <div className="mx-auto w-full max-w-5xl px-6 pb-24 pt-16 sm:pt-20 md:px-10 lg:px-14">
+      <div className="mx-auto w-full max-w-5xl px-5 pb-16 pt-5 sm:px-6 sm:pb-24 sm:pt-20 md:px-10 lg:px-14">
         <BackLink className="text-neutral-900" />
 
         <AnimatedTitle text="Team" />
 
-        <div className="mt-16">
+        <div className="mt-10 sm:mt-16">
           {/* Column headers */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -165,19 +166,19 @@ export default function TeamPage() {
                 }}
                 className={`${ROW} group/row border-b border-black/10 py-5`}
               >
-                <div className="flex items-center gap-3">
-                  <span className="text-base font-medium text-neutral-900 transition-colors duration-300 group-hover/list:text-black/30 group-hover/row:!text-neutral-900 md:text-lg">
+                <div className="flex min-w-0 items-center gap-2 sm:gap-3">
+                  <span className="min-w-0 text-sm font-medium text-neutral-900 transition-colors duration-300 sm:text-base sm:group-hover/list:text-black/30 sm:group-hover/row:!text-neutral-900 md:text-lg">
                     {m.name}
                   </span>
                   {/* Socials — hidden until the row is hovered, then slide in
                       just to the right of the name. */}
-                  <div className="flex -translate-x-1 items-center gap-2 opacity-0 transition-all duration-300 ease-out group-hover/row:translate-x-0 group-hover/row:opacity-100">
+                  <div className="flex shrink-0 items-center gap-1 opacity-100 transition-all duration-300 ease-out sm:-translate-x-1 sm:gap-2 sm:opacity-0 sm:group-hover/row:translate-x-0 sm:group-hover/row:opacity-100">
                     <a
                       href={m.linkedin}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`${m.name} on LinkedIn`}
-                      className="text-black/60 transition-colors hover:text-black"
+                      className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-black/60 transition-colors hover:text-black sm:h-auto sm:w-auto sm:bg-transparent"
                     >
                       <LinkedInIcon />
                     </a>
@@ -187,14 +188,14 @@ export default function TeamPage() {
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label={`${m.name} on X`}
-                        className="text-black/60 transition-colors hover:text-black"
+                        className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-black/60 transition-colors hover:text-black sm:h-auto sm:w-auto sm:bg-transparent"
                       >
                         <XIcon />
                       </a>
                     )}
                   </div>
                 </div>
-                <span className="text-right text-sm text-black/40 transition-colors duration-300 group-hover/row:!text-neutral-900 md:text-base">
+                <span className="text-right text-xs leading-tight text-black/45 transition-colors duration-300 sm:text-sm sm:group-hover/row:!text-neutral-900 md:text-base">
                   {m.position}
                 </span>
               </motion.li>

@@ -815,8 +815,12 @@ const SlidingEaseVerticalBars = ({
 
   const animate = useCallback(() => {
     const canvas = canvasRef.current
+    if (!canvas || canvas.getClientRects().length === 0) {
+      animationFrameId.current = null
+      return
+    }
     const buffers = buffersRef.current
-    if (!canvas || !buffers) return
+    if (!buffers) return
     const ctx = canvas.getContext("2d")
     if (!ctx) return
 
@@ -942,16 +946,24 @@ const SlidingEaseVerticalBars = ({
     const canvas = canvasRef.current
     if (!canvas) return
 
-    resizeCanvas()
     sceneEpochRef.current = Date.now()
     lastTransitionCycleRef.current = -1
 
-    const handleResize = () => resizeCanvas()
+    const startAnimation = () => {
+      if (canvas.getClientRects().length > 0 && animationFrameId.current === null) {
+        animateRef.current()
+      }
+    }
+    const handleResize = () => {
+      if (canvas.getClientRects().length > 0) resizeCanvas()
+      startAnimation()
+    }
     window.addEventListener("resize", handleResize)
     canvas.addEventListener("mousemove", handleMouseMove)
     canvas.addEventListener("mouseleave", handleMouseLeave)
     canvas.addEventListener("mousedown", handleMouseDown)
-    animate()
+    if (canvas.getClientRects().length > 0) resizeCanvas()
+    startAnimation()
 
     return () => {
       window.removeEventListener("resize", handleResize)

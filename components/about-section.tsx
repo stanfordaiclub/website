@@ -3,42 +3,47 @@
 import { Fragment, useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
 import gsap from "gsap";
+import Link from "next/link";
 import { useLenis } from "@/components/smooth-scroll";
 import SlidingEaseVerticalBars from "@/components/sliding-ease-vertical-bars";
 
 const HEADING =
-  "We bring Stanford’s AI community together to push frontier research forward.";
+  "We support Stanford researchers working at the frontier of AI.";
 
-const ITEMS = [
+interface MissionItem {
+  n: string;
+  title: string;
+  body: string;
+  link?: {
+    label: string;
+    href: string;
+  };
+}
+
+const ITEMS: MissionItem[] = [
   {
     n: "01",
-    title: "Build Frontier Research",
-    body: "Support student-led work across models, learning, safety, optimization, and AI systems.",
+    title: "Research Cohort",
+    body: "A small, research-focused group of undergraduates supported with compute and mentorship.",
   },
   {
     n: "02",
-    title: "Develop Research Talent",
-    body: "Provide a selective cohort with compute, mentorship, collaborators, and a public research showcase.",
+    title: "Speaker Series",
+    body: "Talks and panels with researchers, engineers, and C-level leaders working at the frontier.",
+    link: {
+      label: "Past speakers",
+      href: "/speakers",
+    },
   },
   {
     n: "03",
-    title: "Connect Campus to Industry",
-    body: "Host leading researchers and builders through talks, events, and small-group gatherings.",
+    title: "Who We Are",
+    body: "Our team brings experience across SAIL, OpenAI, Google, Jane Street, SpaceX, xAI, and independent research labs.",
   },
   {
     n: "04",
-    title: "Explore AI Beyond Software",
-    body: "Advance emerging applications in biology, healthcare, and other complex real-world domains.",
-  },
-  {
-    n: "05",
-    title: "Turn Research into Results",
-    body: "Our members contribute to published work, frontier labs, and systems deployed across industry.",
-  },
-  {
-    n: "06",
-    title: "Partner with the Community",
-    body: "Sponsors gain access to Stanford talent, research initiatives, recruiting opportunities, and campus events.",
+    title: "Past Work",
+    body: "Our work spans gold-level olympiad reasoning, test-time learning, real-time world models, video reasoning, and more.",
   },
 ];
 
@@ -194,9 +199,64 @@ export default function AboutSection() {
 
   return (
     <section data-snap-section className="relative bg-[#4E0A0A] text-white">
+      <div className="relative overflow-hidden px-6 py-20 sm:hidden">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(circle at 100% 12%, rgba(255,85,96,0.2), transparent 32%), radial-gradient(circle at 0% 82%, rgba(255,85,96,0.09), transparent 36%)",
+          }}
+        />
+        <div className="relative z-10">
+          <p className="text-[11px] font-medium uppercase tracking-[0.26em] text-white/45">
+            What we do
+          </p>
+          <h2 className="mt-4 max-w-lg text-[clamp(2.35rem,11vw,3.5rem)] font-medium leading-[1.02] tracking-[-0.045em]">
+            {HEADING}
+          </h2>
+
+          <div className="mt-12 border-b border-white/20">
+            {ITEMS.map((item) => (
+              <article
+                key={item.n}
+                className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 border-t border-white/20 py-7"
+              >
+                <span className="pt-1 text-[11px] font-medium tabular-nums text-white/40">
+                  {item.n}
+                </span>
+                <div>
+                  <h3
+                    style={{ fontFamily: "var(--font-ciburial)" }}
+                    className="text-2xl font-normal tracking-tight text-white"
+                  >
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-[15px] leading-relaxed text-white/72">
+                    {item.body}
+                    {item.link ? (
+                      <>
+                        {" "}
+                        <Link
+                          href={item.link.href}
+                          className="text-white underline decoration-white/35 underline-offset-4"
+                        >
+                          {item.link.label}
+                        </Link>
+                        .
+                      </>
+                    ) : null}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </div>
+
       <div
         ref={trackRef}
-        className="relative"
+        className="relative hidden sm:block"
         style={{ height: `${100 + ITEMS.length * SCROLL_PER_ITEM}vh` }}
       >
         {/* Pinned panel — stays put while the track scrolls past. */}
@@ -297,6 +357,18 @@ export default function AboutSection() {
                         >
                           <p className="max-w-xl pt-3 text-base leading-relaxed text-white/85 sm:text-lg">
                             {item.body}
+                            {item.link ? (
+                              <>
+                                {" "}
+                                <Link
+                                  href={item.link.href}
+                                  className="underline decoration-white/35 underline-offset-4 transition-colors hover:text-white hover:decoration-white"
+                                >
+                                  {item.link.label}
+                                </Link>
+                                .
+                              </>
+                            ) : null}
                           </p>
                         </motion.div>
                       </div>
