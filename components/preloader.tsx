@@ -7,9 +7,17 @@ import { AnimatePresence, motion } from "framer-motion";
  * Shows welcome text over a "stairs" wipe, then reveals the landing page beneath.
  * Controlled via `show` so the parent can coordinate when the page animations begin.
  */
-export default function Preloader({ show }: { show: boolean }) {
+export default function Preloader({
+  show,
+  onExitComplete,
+}: {
+  show: boolean;
+  onExitComplete?: () => void;
+}) {
   return (
-    <AnimatePresence mode="wait">{show && <Stairs />}</AnimatePresence>
+    <AnimatePresence mode="wait" onExitComplete={onExitComplete}>
+      {show && <Stairs />}
+    </AnimatePresence>
   );
 }
 
@@ -18,7 +26,7 @@ const Stairs = () => {
   const words = copy.split(" ");
 
   return (
-    <motion.div className="pointer-events-none fixed inset-0 z-[100]">
+    <motion.div className="saic-session-preloader pointer-events-none fixed inset-0 z-[100]">
       {/* Welcome text */}
       <div className="absolute z-10 flex h-full w-full items-center justify-center text-center text-white">
         <motion.h1

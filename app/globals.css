@@ -150,6 +150,10 @@
 }
 
 @layer utilities {
+  html.saic-preloaded .saic-session-preloader {
+    display: none;
+  }
+
   .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;

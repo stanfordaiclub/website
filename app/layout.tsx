@@ -50,7 +50,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{if(sessionStorage.getItem('saic-preloaded'))document.documentElement.classList.add('saic-preloaded')}catch{}",
+          }}
+        />
+      </head>
       <body className={`${bdoGrotesk.variable} ${ciburial.variable} antialiased`}>
         <NuqsAdapter>
           <SmoothScroll>{children}</SmoothScroll>

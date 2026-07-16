@@ -18,9 +18,19 @@ const PRELOADER_SESSION_KEY = "saic-preloaded";
  */
 export default function HomeContent() {
   const [loading, setLoading] = useState(true);
+  const [skipPreloader, setSkipPreloader] = useState(false);
   const lenis = useLenis();
 
   useEffect(() => {
+    const clearPreloaderFlag = () => {
+      try {
+        sessionStorage.removeItem(PRELOADER_SESSION_KEY);
+      } catch {
+        return;
+      }
+    };
+    window.addEventListener("pagehide", clearPreloaderFlag);
+
     let hasPlayed = false;
     try {
       hasPlayed = Boolean(sessionStorage.getItem(PRELOADER_SESSION_KEY));
@@ -30,14 +40,24 @@ export default function HomeContent() {
     }
 
     if (hasPlayed) {
-      const frame = requestAnimationFrame(() => setLoading(false));
-      return () => cancelAnimationFrame(frame);
+      document.documentElement.classList.add("saic-preloaded");
+      const frame = requestAnimationFrame(() => {
+        setSkipPreloader(true);
+        setLoading(false);
+      });
+      return () => {
+        cancelAnimationFrame(frame);
+        window.removeEventListener("pagehide", clearPreloaderFlag);
+      };
     }
 
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2500);
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("pagehide", clearPreloaderFlag);
+    };
   }, []);
 
   // Freeze the page at the top while the preloader plays, then release it — so
@@ -109,7 +129,12 @@ export default function HomeContent() {
           className="absolute inset-0 z-[5]"
         />
       )}
-      <Preloader show={loading} />
+      {!skipPreloader && (
+        <Preloader
+          show={loading}
+          onExitComplete={() => document.documentElement.classList.add("saic-preloaded")}
+        />
+      )}
       <FrameDecor start={!loading} />
       <NavBar start={!loading} />
       <IntroText start={!loading} />
