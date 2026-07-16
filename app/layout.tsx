@@ -3,7 +3,6 @@ import localFont from "next/font/local";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import "./globals.css";
 import SmoothScroll from "@/components/smooth-scroll";
-import Cursor from "@/components/cursor";
 
 const bdoGrotesk = localFont({
   src: [
@@ -55,7 +54,6 @@ export default function RootLayout({
       <body className={`${bdoGrotesk.variable} ${ciburial.variable} antialiased`}>
         <NuqsAdapter>
           <SmoothScroll>{children}</SmoothScroll>
-          <Cursor />
         </NuqsAdapter>
       </body>
     </html>

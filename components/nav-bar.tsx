@@ -69,21 +69,23 @@ function RollingText({ text }: { text: string }) {
 /**
  * Minimal top-right navigation over the hero. On desktop, muted labels that
  * brighten to white with a per-letter roll and an underline sweep on hover,
- * followed by the club's social links; each climbs up from its baseline on
- * load. On mobile it collapses to a hamburger that opens a full-screen menu
- * with the pages and socials, animating in smoothly.
+ * followed by the club's social links. On mobile it collapses to a hamburger
+ * menu with the pages and socials.
  */
 export default function NavBar({ start = true }: { start?: boolean }) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
-  // Hide the items below their baseline immediately so they don't sit at rest
-  // behind the preloader before the reveal runs.
+  // Keep the controls quiet behind the preloader.
   useEffect(() => {
     const root = rootRef.current;
     if (!root) return;
     const ctx = gsap.context(() => {
-      gsap.set(".nav-item", { yPercent: 120 });
+      gsap.set(".nav-item", {
+        autoAlpha: 0,
+        y: 8,
+        filter: "blur(4px)",
+      });
     }, root);
     return () => ctx.revert();
   }, []);
@@ -96,13 +98,19 @@ export default function NavBar({ start = true }: { start?: boolean }) {
     const ctx = gsap.context(() => {
       gsap.fromTo(
         ".nav-item",
-        { yPercent: 120 },
         {
-          yPercent: 0,
+          autoAlpha: 0,
+          y: 8,
+          filter: "blur(4px)",
+        },
+        {
+          autoAlpha: 1,
+          y: 0,
+          filter: "blur(0px)",
           duration: 0.8,
-          ease: "power4.out",
-          stagger: 0.06,
-          delay: 1.0,
+          ease: "power3.out",
+          stagger: 0.055,
+          delay: 0.95,
         }
       );
     }, root);
@@ -129,11 +137,11 @@ export default function NavBar({ start = true }: { start?: boolean }) {
         {/* Desktop nav */}
         <ul className="hidden items-center gap-8 sm:flex sm:gap-10">
           {LINKS.map(({ label, href }) => (
-            <li key={href} className="flex items-center overflow-hidden">
+            <li key={href} className="flex items-center">
               <Link
                 href={href}
                 aria-label={label}
-                className="nav-item group relative inline-block text-sm font-medium tracking-[-0.02em] text-white/60 transition-colors hover:text-white"
+                className="nav-item group relative inline-block text-sm font-medium tracking-[-0.02em] text-white/60 transition-colors will-change-[transform,filter,opacity] hover:text-white"
               >
                 <RollingText text={label} />
                 {/* Underline sweep — preserved alongside the letter roll */}
@@ -142,7 +150,7 @@ export default function NavBar({ start = true }: { start?: boolean }) {
             </li>
           ))}
 
-          <li className="flex overflow-hidden py-1.5">
+          <li className="flex py-1.5">
             <div className="flex items-center gap-3.5">
               {SOCIALS.map(({ label, href, icon }) => (
                 <a
@@ -151,7 +159,7 @@ export default function NavBar({ start = true }: { start?: boolean }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="nav-item inline-flex text-white/60 transition-colors hover:text-white"
+                  className="nav-item inline-flex text-white/60 transition-colors will-change-[transform,filter,opacity] hover:text-white"
                 >
                   {icon}
                 </a>
@@ -166,7 +174,7 @@ export default function NavBar({ start = true }: { start?: boolean }) {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="nav-item relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-[6px] text-white sm:hidden"
+          className="nav-item relative z-50 flex h-10 w-10 flex-col items-center justify-center gap-[6px] text-white will-change-[transform,filter,opacity] sm:hidden"
         >
           <motion.span
             className="block h-px w-6 bg-white"

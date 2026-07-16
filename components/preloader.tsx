@@ -14,31 +14,33 @@ export default function Preloader({ show }: { show: boolean }) {
 }
 
 const Stairs = () => {
-  const words = "Stanford's home for students in AI".split(" ");
+  const copy = "Stanford's home for students in AI";
+  const words = copy.split(" ");
 
   return (
     <motion.div className="pointer-events-none fixed inset-0 z-[100]">
       {/* Welcome text */}
       <div className="absolute z-10 flex h-full w-full items-center justify-center text-center text-white">
         <motion.h1
+          aria-label={copy}
           className="text-3xl font-medium tracking-tighter"
           style={{ fontFamily: "var(--font-bdo-grotesk)" }}
+          exit={{
+            y: -20,
+            opacity: 0,
+            filter: "blur(5px)",
+            transition: { duration: 0.5, ease: [0.7, 0, 0.3, 1] },
+          }}
         >
           {words.map((word, index) => (
-            <span key={index} className="mr-2 inline-block overflow-hidden pb-1">
+            <span key={word} className="mr-2 inline-block overflow-hidden pb-1">
               <motion.span
                 className="inline-block"
-                initial={{ y: "115%" }}
-                animate={{ y: 0 }}
-                // Roll up and out (never back down) so the text leaves with the
-                // stairs wipe instead of dropping.
-                exit={{
-                  y: "-115%",
-                  transition: { duration: 0.5, ease: [0.7, 0, 0.3, 1] },
-                }}
+                initial={{ y: "-115%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
                 transition={{
-                  duration: 0.8,
-                  delay: 0.15 * index,
+                  duration: 0.5,
+                  delay: 0.055 * index,
                   ease: [0.16, 1, 0.3, 1],
                 }}
               >

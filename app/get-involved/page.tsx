@@ -4,7 +4,7 @@ import { Fragment, useEffect, useRef } from "react";
 import gsap from "gsap";
 import BackLink from "@/components/back-link";
 import PageFrame from "@/components/page-frame";
-import SlidingEaseVerticalBars from "@/components/sliding-ease-vertical-bars";
+import OriginalRails from "@/components/original-rails";
 
 const INTRO =
   "Subscribe to our mailing list and follow us on social media to keep up with the latest events, workshops, and exclusive opportunities in AI at Stanford.";
@@ -97,7 +97,7 @@ export default function GetInvolvedPage() {
       {/* Ambient animated red bars, faded out over the left so the copy stays
           clean; a warm glow anchors the corner. */}
       <div className="absolute inset-0 z-0">
-        <SlidingEaseVerticalBars
+        <OriginalRails
           backgroundColor="#000000"
           lineColor="#241010"
           barColor="#b81d24"

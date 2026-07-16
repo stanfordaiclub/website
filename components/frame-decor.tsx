@@ -5,7 +5,7 @@ import gsap from "gsap";
 
 /**
  * Thin line frame that draws itself in around the viewport as the hero title
- * climbs in. An outer inset rectangle plus a set of inner margin lines that
+ * resolves. An outer inset rectangle plus a set of inner margin lines that
  * cross near each edge to carve out corner boxes. Each line grows from a corner
  * so the whole frame appears to be traced on.
  */
@@ -31,8 +31,8 @@ export default function FrameDecor({ start = true }: { start?: boolean }) {
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
-        // Begin just before the title's letters climb in (title delay is 0.9s)
-        // so the frame is tracing itself as the words arrive.
+        // Begin just before the title resolves so the frame is tracing itself
+        // while the letterforms sharpen.
         delay: 0.7,
         defaults: { duration: 1.1, ease: "power3.inOut" },
       });

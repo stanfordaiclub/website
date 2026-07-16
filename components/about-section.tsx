@@ -216,7 +216,7 @@ export default function AboutSection() {
             className="pointer-events-none absolute inset-0 z-0"
             style={{
               background:
-                "linear-gradient(to right, #4E0A0A 0%, #4E0A0A 48%, rgba(78,10,10,0) 82%)",
+                "linear-gradient(to right, #4E0A0A 0%, #4E0A0A 44%, rgba(78,10,10,0) 72%)",
             }}
           />
           {/* Soften the bars near the top too, so the header stays legible. */}
