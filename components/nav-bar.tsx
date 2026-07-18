@@ -72,7 +72,13 @@ function RollingText({ text }: { text: string }) {
  * followed by the club's social links. On mobile it collapses to a hamburger
  * menu with the pages and socials.
  */
-export default function NavBar({ start = true }: { start?: boolean }) {
+export default function NavBar({
+  start = true,
+  instant = false,
+}: {
+  start?: boolean;
+  instant?: boolean;
+}) {
   const rootRef = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
 
@@ -82,16 +88,16 @@ export default function NavBar({ start = true }: { start?: boolean }) {
     if (!root) return;
     const ctx = gsap.context(() => {
       gsap.set(".nav-item", {
-        autoAlpha: 0,
-        y: 8,
-        filter: "blur(4px)",
+        autoAlpha: instant ? 1 : 0,
+        y: instant ? 0 : 8,
+        filter: instant ? "blur(0px)" : "blur(4px)",
       });
     }, root);
     return () => ctx.revert();
-  }, []);
+  }, [instant]);
 
   useEffect(() => {
-    if (!start) return;
+    if (!start || instant) return;
     const root = rootRef.current;
     if (!root) return;
 
@@ -116,7 +122,7 @@ export default function NavBar({ start = true }: { start?: boolean }) {
     }, root);
 
     return () => ctx.revert();
-  }, [start]);
+  }, [instant, start]);
 
   // Lock scroll while the mobile menu is open.
   useEffect(() => {

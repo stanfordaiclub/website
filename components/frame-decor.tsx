@@ -9,7 +9,13 @@ import gsap from "gsap";
  * cross near each edge to carve out corner boxes. Each line grows from a corner
  * so the whole frame appears to be traced on.
  */
-export default function FrameDecor({ start = true }: { start?: boolean }) {
+export default function FrameDecor({
+  start = true,
+  instant = false,
+}: {
+  start?: boolean;
+  instant?: boolean;
+}) {
   const rootRef = useRef<HTMLDivElement>(null);
 
   // Collapse every line before the draw so nothing flashes at full length
@@ -18,14 +24,14 @@ export default function FrameDecor({ start = true }: { start?: boolean }) {
     const root = rootRef.current;
     if (!root) return;
     const ctx = gsap.context(() => {
-      gsap.set(".frame-h", { scaleX: 0 });
-      gsap.set(".frame-v", { scaleY: 0 });
+      gsap.set(".frame-h", { scaleX: instant ? 1 : 0 });
+      gsap.set(".frame-v", { scaleY: instant ? 1 : 0 });
     }, root);
     return () => ctx.revert();
-  }, []);
+  }, [instant]);
 
   useEffect(() => {
-    if (!start) return;
+    if (!start || instant) return;
     const root = rootRef.current;
     if (!root) return;
 
@@ -45,7 +51,7 @@ export default function FrameDecor({ start = true }: { start?: boolean }) {
     }, root);
 
     return () => ctx.revert();
-  }, [start]);
+  }, [instant, start]);
 
   const line = "absolute bg-white/15";
 

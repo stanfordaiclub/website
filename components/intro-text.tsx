@@ -7,7 +7,13 @@ const COPY =
  * Short mission blurb in the top-left corner. Its token field denoises after
  * the hero title begins resolving.
  */
-export default function IntroText({ start = true }: { start?: boolean }) {
+export default function IntroText({
+  start = true,
+  instant = false,
+}: {
+  start?: boolean;
+  instant?: boolean;
+}) {
   return (
     <div
       className="pointer-events-none absolute left-6 right-16 top-24 z-20 max-w-none sm:bottom-0 sm:left-[5rem] sm:right-auto sm:top-auto sm:max-w-[28rem] sm:pb-[4.5rem]"
@@ -19,6 +25,7 @@ export default function IntroText({ start = true }: { start?: boolean }) {
         <DiffusionText
           text={COPY}
           start={start}
+          instant={instant}
           delay={450}
           duration={1800}
           stepMs={50}

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import HeroVideo from "@/components/hero-video";
 import SiteTitle from "@/components/site-title";
 import Preloader from "@/components/preloader";
@@ -10,6 +10,7 @@ import IntroText from "@/components/intro-text";
 import { useLenis } from "@/components/smooth-scroll";
 
 const PRELOADER_SESSION_KEY = "saic-preloaded";
+let homeIntroCompletedInRuntime = false;
 
 /**
  * Orchestrates the landing intro: the full-bleed hero video renders immediately
@@ -17,9 +18,39 @@ const PRELOADER_SESSION_KEY = "saic-preloaded";
  * top of it. Once the preloader clears, the title climbs in.
  */
 export default function HomeContent() {
-  const [loading, setLoading] = useState(true);
-  const [skipPreloader, setSkipPreloader] = useState(false);
+  const [returningToHome, setReturningToHome] = useState(
+    () => homeIntroCompletedInRuntime
+  );
+  const [loading, setLoading] = useState(() => !homeIntroCompletedInRuntime);
+  const [skipPreloader, setSkipPreloader] = useState(
+    () => homeIntroCompletedInRuntime
+  );
   const lenis = useLenis();
+
+  useLayoutEffect(() => {
+    let restoreFrame = 0;
+    let hasPlayed = homeIntroCompletedInRuntime;
+    try {
+      hasPlayed ||= Boolean(sessionStorage.getItem(PRELOADER_SESSION_KEY));
+      if (!hasPlayed) sessionStorage.setItem(PRELOADER_SESSION_KEY, "1");
+    } catch {
+      hasPlayed = homeIntroCompletedInRuntime;
+    }
+
+    if (hasPlayed) {
+      document.documentElement.classList.add("saic-preloaded");
+      if (!homeIntroCompletedInRuntime) {
+        restoreFrame = requestAnimationFrame(() => {
+          setReturningToHome(true);
+          setSkipPreloader(true);
+          setLoading(false);
+        });
+      }
+    }
+
+    homeIntroCompletedInRuntime = true;
+    return () => cancelAnimationFrame(restoreFrame);
+  }, []);
 
   useEffect(() => {
     const clearPreloaderFlag = () => {
@@ -31,24 +62,8 @@ export default function HomeContent() {
     };
     window.addEventListener("pagehide", clearPreloaderFlag);
 
-    let hasPlayed = false;
-    try {
-      hasPlayed = Boolean(sessionStorage.getItem(PRELOADER_SESSION_KEY));
-      if (!hasPlayed) sessionStorage.setItem(PRELOADER_SESSION_KEY, "1");
-    } catch {
-      hasPlayed = false;
-    }
-
-    if (hasPlayed) {
-      document.documentElement.classList.add("saic-preloaded");
-      const frame = requestAnimationFrame(() => {
-        setSkipPreloader(true);
-        setLoading(false);
-      });
-      return () => {
-        cancelAnimationFrame(frame);
-        window.removeEventListener("pagehide", clearPreloaderFlag);
-      };
+    if (returningToHome) {
+      return () => window.removeEventListener("pagehide", clearPreloaderFlag);
     }
 
     const timer = setTimeout(() => {
@@ -58,7 +73,7 @@ export default function HomeContent() {
       clearTimeout(timer);
       window.removeEventListener("pagehide", clearPreloaderFlag);
     };
-  }, []);
+  }, [returningToHome]);
 
   // Freeze the page at the top while the preloader plays, then release it — so
   // there's no way to peek at the red section before the intro has run.
@@ -159,10 +174,10 @@ export default function HomeContent() {
           onExitComplete={() => document.documentElement.classList.add("saic-preloaded")}
         />
       )}
-      <FrameDecor start={!loading} />
-      <NavBar start={!loading} />
-      <IntroText start={!loading} />
-      <SiteTitle start={!loading} />
+      <FrameDecor start={!loading} instant={returningToHome} />
+      <NavBar start={!loading} instant={returningToHome} />
+      <IntroText start={!loading} instant={returningToHome} />
+      <SiteTitle start={!loading} instant={returningToHome} />
     </>
   );
 }

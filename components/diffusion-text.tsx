@@ -41,6 +41,7 @@ function renderNoiseWord(
 interface DiffusionTextProps {
   text: string;
   start?: boolean;
+  instant?: boolean;
   delay?: number;
   duration?: number;
   stepMs?: number;
@@ -56,6 +57,7 @@ interface DiffusionTextProps {
 export default function DiffusionText({
   text,
   start = true,
+  instant = false,
   delay = 0,
   duration = 1800,
   stepMs = 55,
@@ -75,6 +77,13 @@ export default function DiffusionText({
   }, [text]);
 
   useEffect(() => {
+    if (instant) {
+      indexedWords.forEach((indexedWord, wordIndex) => {
+        const element = wordRefs.current[wordIndex];
+        if (element) element.textContent = indexedWord.word;
+      });
+      return;
+    }
     if (!start) return;
 
     const startedAt = performance.now();
@@ -102,7 +111,7 @@ export default function DiffusionText({
 
     animationFrame = requestAnimationFrame(update);
     return () => cancelAnimationFrame(animationFrame);
-  }, [delay, duration, indexedWords, salt, start, stepMs]);
+  }, [delay, duration, indexedWords, instant, salt, start, stepMs]);
 
   return indexedWords.map((indexedWord, wordIndex) => {
     return (
@@ -129,7 +138,7 @@ export default function DiffusionText({
             }}
             className="absolute inset-0 flex items-center justify-center whitespace-nowrap"
           >
-            {renderNoiseWord(indexedWord, 0, 0, salt)}
+            {instant ? indexedWord.word : renderNoiseWord(indexedWord, 0, 0, salt)}
           </span>
         </span>
         {wordIndex < indexedWords.length - 1 ? " " : null}

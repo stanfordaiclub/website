@@ -2,7 +2,13 @@ import DiffusionText from "@/components/diffusion-text";
 
 const TITLE = "Stanford AI Club";
 
-export default function SiteTitle({ start = true }: { start?: boolean }) {
+export default function SiteTitle({
+  start = true,
+  instant = false,
+}: {
+  start?: boolean;
+  instant?: boolean;
+}) {
   return (
     <div
       className="pointer-events-none absolute bottom-0 left-0 z-20 w-full px-6 pb-[max(1.25rem,env(safe-area-inset-bottom))] sm:left-auto sm:right-0 sm:w-auto sm:px-0 sm:pr-[5.5rem] sm:pb-[4.5rem]"
@@ -15,6 +21,7 @@ export default function SiteTitle({ start = true }: { start?: boolean }) {
         <DiffusionText
           text={TITLE}
           start={start}
+          instant={instant}
           delay={180}
           duration={1450}
           stepMs={45}
