@@ -108,6 +108,8 @@ export default function SpeakersPage() {
 
   return (
     <main className="min-h-dvh bg-black text-white">
+      <BackLink className="fixed left-3 top-3 z-30 text-white sm:left-6 sm:top-6" />
+
       <div className="md:grid md:grid-cols-2">
         {/* Left half — a full-height background video (a different clip from the
             landing page). Sticky so it stays in view while the speakers scroll.
@@ -130,21 +132,17 @@ export default function SpeakersPage() {
             </video>
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
 
-            {/* Back — a crisp chevron over the top-left of the video. */}
-            <BackLink className="absolute left-6 top-6 z-10 text-white lg:left-8 lg:top-8" />
           </div>
         </div>
 
         {/* Right half — the full speakers list. */}
-        <div className="px-5 pb-16 pt-5 sm:px-6 sm:pb-24 sm:pt-20 md:px-10 lg:px-14">
-          {/* Mobile back — the video (and its chevron) is hidden on small
-              screens, so surface a chevron at the top-left of the list. */}
-          <BackLink className="mb-4 text-white sm:mb-6 md:hidden" />
-
+        <div className="px-5 pb-16 pt-20 sm:px-6 sm:pb-24 md:px-10 lg:px-14">
           <AnimatedTitle text="Speakers" />
 
           <p className="mt-4 max-w-lg text-sm leading-relaxed text-white/45 sm:mt-6 sm:text-base md:text-lg">
-            Frontier researchers. Stanford rooms. 800K+ views and counting.
+            We’ve had the privilege to host founders, researchers, and operators at the
+            forefront of the AI boom. On videos released publicly, we have amassed 800k+
+            views.
           </p>
 
           <div className="mt-10 flex flex-col gap-10 sm:mt-14 sm:gap-14">

@@ -222,9 +222,9 @@ function TeamSection({
 export default function TeamPage() {
   return (
     <main className="min-h-dvh bg-white text-neutral-900">
-      <div className="mx-auto w-full max-w-4xl px-5 pb-16 pt-5 sm:px-6 sm:pb-20 sm:pt-12 md:px-10">
-        <BackLink className="text-neutral-900" />
+      <BackLink className="fixed left-3 top-3 z-30 text-neutral-900 sm:left-6 sm:top-6" />
 
+      <div className="mx-auto w-full max-w-4xl px-5 pb-16 pt-16 sm:px-6 sm:pb-20 sm:pt-[4.75rem] md:px-10">
         <AnimatedTitle text="Team" />
 
         <TeamSection title="Executive Team" members={EXECUTIVE_TEAM} />

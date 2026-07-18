@@ -7,7 +7,7 @@ import PageFrame from "@/components/page-frame";
 import OriginalRails from "@/components/original-rails";
 
 const INTRO =
-  "Talks, research opportunities, and new initiatives—straight from Stanford’s frontier AI community.";
+  "Are you a Stanford student? Join us to learn more about talks, research opportunities, and initiatives in AI!";
 
 const MAILING_LIST =
   "https://mailman.stanford.edu/mailman/listinfo/saic-members";
@@ -125,9 +125,10 @@ export default function GetInvolvedPage() {
       />
 
       <PageFrame />
+      <BackLink className="fixed left-3 top-3 z-30 text-white sm:left-6 sm:top-6" />
 
       <div className="relative z-10 mx-auto flex min-h-dvh w-full max-w-6xl flex-col px-5 pb-[max(2rem,env(safe-area-inset-bottom))] pt-5 sm:px-10 sm:pb-16 sm:pt-14 lg:px-[5.5rem]">
-        <BackLink className="text-white" />
+        <div aria-hidden className="h-11 shrink-0 sm:h-7" />
 
         <div className="flex flex-1 flex-col justify-center py-12 sm:py-16">
           <p className="mb-7 flex items-center gap-3 text-xs font-medium uppercase tracking-[0.28em] text-white/40">
